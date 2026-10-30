@@ -16,6 +16,6 @@ public class Parcela {
     public String getCodigo() { return codigo; }
 
     public double areaEnMetrosCuadrados() {
-        return hectareas * METROS_CUADRADOS_POR_HECTAREA; revisados por cristopher macias
+        return hectareas * METROS_CUADRADOS_POR_HECTAREA; 
     }
 }
