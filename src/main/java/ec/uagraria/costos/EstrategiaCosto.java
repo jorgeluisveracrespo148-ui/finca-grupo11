@@ -1,6 +1,17 @@
-package ec.uagraria.costos;
+public sealed interface Cultivo permits Banano, Cacao, Arroz {
+    String nombreComun();
+}
 
-@FunctionalInterface
-public interface EstrategiaCosto {
-    double calcular(Lote lote, double costoJornal);
+public record Banano(String variedad) implements Cultivo {
+    @Override public String nombreComun() { return "Banano " + variedad; }
+}
+
+public record Cacao(String variedad, boolean organico) implements Cultivo {
+    @Override public String nombreComun() { return "Cacao " + variedad; }
+}
+
+public record Arroz(int ciclosPorAnio) implements Cultivo {
+    @Override public String nombreComun() {
+        return "Arroz (" + ciclosPorAnio + " ciclos/año)";
+    }
 }
