@@ -2,29 +2,43 @@ package ec.uagraria.costos;
 
 
 
+import java.util.List;
+
+
+
 public class Main {
 
     public static void main(String[] args) {
 
-        // Control del Paso 1: costo de un insumo
+        // Control de los Pasos 2 y 3: lote de banano de 4 ha
 
-        Insumo urea = new Insumo("Urea 50 kg", 12, "saco", 32.50);
+        Lote lote = new Lote("L-01", new Banano("Cavendish"), 4.0, List.of(
 
-        System.out.println("Costo de la urea: " + urea.costo());
+                new Insumo("Urea 50 kg", 12, "saco", 32.50),
+
+                new Insumo("Fungicida", 8, "litro", 21.75),
+
+                new Insumo("Semilla certificada", 1, "lote", 180.00)));
+
+        System.out.println("Costo de insumos: " + lote.costoInsumos());
+
+        System.out.println("Jornales banano: " + lote.jornalesPorHectarea());
 
 
 
-        // Control de la validación: debe rechazar una cantidad negativa
+        // Cada rama del switch, con lotes sin insumos
 
-        try {
+        System.out.println("Jornales cacao orgánico: "
 
-            new Insumo("Fungicida", -1, "litro", 21.75);
+                + new Lote("L-02", new Cacao("Nacional", true), 1, List.of()).jornalesPorHectarea());
 
-        } catch (IllegalArgumentException e) {
+        System.out.println("Jornales cacao convencional: "
 
-            System.out.println("Validación correcta: " + e.getMessage());
+                + new Lote("L-03", new Cacao("CCN-51", false), 1, List.of()).jornalesPorHectarea());
 
-        }
+        System.out.println("Jornales arroz 2 ciclos: "
+
+                + new Lote("L-04", new Arroz(2), 1, List.of()).jornalesPorHectarea());
 
     }
 
