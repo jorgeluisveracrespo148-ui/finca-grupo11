@@ -2,6 +2,9 @@ package ec.uagraria.costos;
 
 
 
+import ec.edu.uagraria.postcosecha.reglas.CalculadoraCostos;
+import ec.edu.uagraria.postcosecha.reglas.Estrategias;
+
 import java.util.List;
 
 

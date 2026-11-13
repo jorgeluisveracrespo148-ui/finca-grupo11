@@ -2,6 +2,8 @@ package ec.uagraria.costos;
 
 
 
+import ec.edu.uagraria.postcosecha.reglas.CalculadoraCostos;
+import ec.edu.uagraria.postcosecha.reglas.Estrategias;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
