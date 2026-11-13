@@ -1,71 +1,28 @@
 package ec.edu.uagraria.postcosecha.reglas;
 
-
-import ec.uagraria.costos.Insumo;
-
+/** Taller 3: las estrategias del tema como lambdas. */
 public final class Estrategias {
+    public static final double IVA = 0.15;
 
-    public static final double VALOR_JORNAL = 18.50; // jornal referencial (USD)
+    private Estrategias() { }
 
-    public static final double IVA = 0.15;           // IVA vigente en Ecuador
-
-
-
-    private Estrategias() { } // clase de utilidades: no se instancia
-
-
-
-    public static EstrategiaCosto costoDirecto() {
-
-        return lote -> lote.costoInsumos();
-
+    /** Kilogramos perdidos sobre kilogramos recibidos, en porcentaje. FORMULA PROVISIONAL: reemplacen por la de su tema. */
+    public static EstrategiaCalculo porcentajeMerma() {
+        return p -> p.pesoEnKilogramos() * 1.0;
     }
 
-
-
-    public static EstrategiaCosto costoConManoDeObra() {
-
-        return lote -> lote.costoInsumos()
-
-                + lote.jornalesPorHectarea() * lote.hectareas() * VALOR_JORNAL;
-
+    /** Kilogramos perdidos por el precio de compra. FORMULA PROVISIONAL: reemplacen por la de su tema. */
+    public static EstrategiaCalculo perdidaEconomica() {
+        return p -> p.pesoEnKilogramos() * 1.25;
     }
 
-
-
-    public static EstrategiaCosto costoPorHectarea() {
-
-        return lote -> costoConManoDeObra().calcular(lote) / lote.hectareas();
-
+    /** Kilogramos aprovechables entregados por un proveedor sobre lo recibido. FORMULA PROVISIONAL: reemplacen por la de su tema. */
+    public static EstrategiaCalculo rendimientoProveedor() {
+        return p -> p.pesoEnKilogramos() * 1.5;
     }
 
-
-
-    public static EstrategiaCosto costoConSubsidioFertilizante(double porcentaje) {
-
-        return lote -> {
-
-            double descuento = lote.insumos().stream()
-
-                    .filter(i -> i.nombre().toLowerCase().contains("urea"))
-
-                    .mapToDouble(Insumo::costo) // referencia a método
-
-                    .sum() * porcentaje;
-
-            return costoConManoDeObra().calcular(lote) - descuento;
-
-        };
-
+    /** Composicion: envuelve otra estrategia. */
+    public static EstrategiaCalculo conIva(EstrategiaCalculo base) {
+        return p -> base.calcular(p) * (1 + IVA);
     }
-
-
-
-    public static EstrategiaCosto conIva(EstrategiaCosto base) {
-
-        return lote -> base.calcular(lote) * (1 + IVA);
-
-    }
-
 }
-
