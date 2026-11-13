@@ -62,7 +62,7 @@ public class DemoTaller4 {
         // dispara CAMARA_FUERA_TEMPERATURA 
 
         motor.procesar(new Lectura(Magnitud.TEMPERATURA_DE_LA_CAMARA, "CAM-0001", 10.5));
-
+        Configuracion.INSTANCIA.cambiarMermaMaxima(8);
         // en el umbral exacto: NO dispara 
 
         motor.procesar(new Lectura(Magnitud.MERMA_DEL_LOTE, "LOT-0031", 10.0));
