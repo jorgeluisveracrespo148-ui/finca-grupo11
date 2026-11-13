@@ -1,6 +1,8 @@
-package ec.uagraria.costos;
+package ec.edu.uagraria.postcosecha.reglas;
 
 
+
+import ec.uagraria.costos.Lote;
 
 import java.util.Optional;
 
